@@ -3,8 +3,10 @@ import { startImageUpload } from './extensions/image-extention/UploadImage';
 
 export const defaultEditorProps: EditorProps = {
   attributes: {
-    class: `prose-lg prose-stone dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`
+    class: `prose md:prose-lg lg:prose-xl prose-slate dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`
   },
+
+  //
   handleDOMEvents: {
     keydown: (_view, event) => {
       // prevent default event listeners from firing when slash command is active
@@ -16,6 +18,8 @@ export const defaultEditorProps: EditorProps = {
       }
     }
   },
+
+  // 处理粘贴
   handlePaste: (view, event) => {
     if (event.clipboardData && event.clipboardData.files && event.clipboardData.files[0]) {
       event.preventDefault();
@@ -27,6 +31,8 @@ export const defaultEditorProps: EditorProps = {
     }
     return false;
   },
+
+  //
   handleDrop: (view, event, _slice, moved) => {
     if (!moved && event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
       event.preventDefault();

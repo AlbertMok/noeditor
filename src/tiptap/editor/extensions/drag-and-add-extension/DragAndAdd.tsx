@@ -105,7 +105,7 @@ export function DragHandle(options: DragHandleOptions) {
       // 添加按钮
       addHandleElement = document.createElement('div');
       addHandleElement.draggable = true;
-      addHandleElement.dataset.dragHandle = '';
+      addHandleElement.dataset.addHandle = '';
       addHandleElement.classList.add('add-handle');
       addHandleElement.addEventListener('dragstart', (event) => {
         handleDragStart(event, view);
@@ -127,7 +127,6 @@ export function DragHandle(options: DragHandleOptions) {
         destroy: () => {
           dragHandleElement?.remove?.();
           dragHandleElement = null;
-
           // plus按钮
           addHandleElement?.remove?.();
           addHandleElement = null;
@@ -182,7 +181,7 @@ export function DragHandle(options: DragHandleOptions) {
           dragHandleElement.style.left = `${rect.left - rect.width}px`;
           dragHandleElement.style.top = `${rect.top}px`;
 
-          addHandleElement.style.left = `cal(${rect.left - rect.width} - 1.5rem )px`;
+          addHandleElement.style.left = `${rect.left - rect.width - 24}px`;
           addHandleElement.style.top = `${rect.top}px`;
           showDragHandle();
         },

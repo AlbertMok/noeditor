@@ -1,5 +1,9 @@
 .ProseMirror {
-  @apply p-12 px-8 sm:px-12;
+  @apply sm:px-12 md:px-6;
+  padding: 6rem;
+  width: max-content;
+  min-height: 1200px;
+  max-height: max-content;
 }
 
 .ProseMirror .is-editor-empty:first-child::before {
@@ -172,8 +176,8 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
   opacity: 1;
   transition: opacity ease-in 0.2s;
   border-radius: 0.25rem;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBsdXMiPjxwYXRoIGQ9Ik01IDEyaDE0Ii8+PHBhdGggZD0iTTEyIDV2MTQiLz48L3N2Zz4=');
-  background-size: calc(0.5em + 0.375rem) calc(0.5em + 0.375rem);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3YTdhN2EiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
+  // background-size: calc(0.5em + 0.375rem) calc(0.5em + 0.375rem);
   background-repeat: no-repeat;
   background-position: center;
   width: 1.5rem;
