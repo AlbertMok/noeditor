@@ -21,9 +21,9 @@ import tippy from 'tippy.js';
 // import { LoadingCircle } from '../../icons/loading-circle';
 // import { toast } from 'sonner';
 import va from '@vercel/analytics';
+import { startImageUpload } from '../image-extention/UploadImage';
 // import { Magic } from '../../icons';
 // import { getPrevText } from '../../editor';
-// import { startImageUpload } from '../plugins/upload-images';
 
 interface CommandItemProps {
   title: string;
@@ -169,7 +169,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
           if (input.files?.length) {
             const file = input.files[0];
             const pos = editor.view.state.selection.from;
-            // startImageUpload(file, editor.view, pos);
+            startImageUpload(file, editor.view, pos);
             console.log(file, pos);
           }
         };
