@@ -1,4 +1,4 @@
-import { cn, getUrlFromString } from '../../../lib/utils';
+import { cn, getUrlFromString } from '@/tiptap/lib/utils';
 import { Editor } from '@tiptap/core';
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react';
 

@@ -4,17 +4,18 @@ import { useEffect, useState } from 'react';
 import { useEditor, EditorContent, JSONContent, Extension } from '@tiptap/react';
 import { defaultEditorProps } from './props';
 import { defaultExtensions } from './extensions';
-import useLocalStorage from '../../lib/hooks/use-local-storage';
+import useLocalStorage from '../lib/hooks/use-local-storage';
 import { useDebouncedCallback } from 'use-debounce';
 // import { useCompletion } from 'ai/react';
 // import { toast } from 'sonner';
 // import va from '@vercel/analytics';
 import { defaultEditorContent } from './default-content';
-import { EditorBubbleMenu } from './bubble-menu';
-import { getPrevText } from '../../lib/editor';
+
+import { getPrevText } from '../lib/editor';
 import { ImageResizer } from './extensions/image-resizer';
 import { EditorProps } from '@tiptap/pm/view';
 import { Editor as EditorClass } from '@tiptap/core';
+import { EditorBubbleMenu } from './extensions/bubble-menu';
 
 export default function Editor({
   // completionApi = '/api/generate',
