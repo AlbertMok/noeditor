@@ -107,6 +107,7 @@ export function DragHandle(options: DragHandleOptions) {
       addHandleElement.draggable = true;
       addHandleElement.dataset.addHandle = '';
       addHandleElement.classList.add('add-handle');
+
       addHandleElement.addEventListener('dragstart', (event) => {
         handleDragStart(event, view);
       });
