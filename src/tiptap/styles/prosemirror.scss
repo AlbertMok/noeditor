@@ -144,7 +144,7 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
   height: 1.5rem;
   z-index: 50;
   cursor: grab;
-
+  transition: ease-in-out opacity 0.2s;
   &:hover {
     background-color: var(--novel-stone-100);
     transition: background-color 0.2s;
@@ -157,6 +157,7 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
 
   &.hide {
     opacity: 0;
+
     pointer-events: none;
   }
 
@@ -181,7 +182,7 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
   height: 1.5rem;
   z-index: 50;
   cursor: pointer;
-
+  transition: ease-in-out opacity 0.2s;
   &:hover {
     background-color: var(--novel-stone-100);
     transition: background-color 0.2s;

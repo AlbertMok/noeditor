@@ -1,12 +1,13 @@
-import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverHeading, PopoverTrigger } from './Popover';
-
+import { Popover } from './Popover';
+import { PopoverClose, PopoverContent, PopoverDescription } from './Popover/PopoverContent';
+import { PopoverHeading } from './Popover/PopoverHeading';
+import { PopoverTrigger } from './Popover/PopoverTrigger';
+import './style.scss';
 export function SelectMenu() {
   return (
     <div id="add-handle">
       <Popover>
-        {/* 触发开关 */}
         <PopoverTrigger>as</PopoverTrigger>
-        {/*  */}
         <PopoverContent className="Popover">
           <PopoverHeading>My popover heading</PopoverHeading>
           <PopoverDescription>My popover description</PopoverDescription>

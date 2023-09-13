@@ -1,11 +1,11 @@
 import { Editor } from '@tiptap/core';
-import { NodeViewWrapper } from '@tiptap/react';
 import { useEffect, useRef, useState } from 'react';
 import { absoluteRect, nodeDOMAtCoords, nodePosAtDOM } from './util';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
 import { NodeSelection } from '@tiptap/pm/state';
+import { SelectMenu } from './SelectMenu';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -161,13 +161,14 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
     }
     return true;
   }
-  const addClassNames = `add-handle ${isHidden ? 'hidden' : ''}`;
-  const dragClassNames = `drag-handle ${isHidden ? 'hidden' : ''}`;
+  const addClassNames = `add-handle ${isHidden ? 'hide' : ''}`;
+  const dragClassNames = `drag-handle ${isHidden ? 'hide' : ''}`;
 
   return (
-    <NodeViewWrapper className="toc">
+    <div className="toc">
       {isEditable() && (
         <>
+          <SelectMenu />
           <div
             ref={addHandleRef}
             className={addClassNames}
@@ -181,6 +182,6 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
           ></div>
         </>
       )}
-    </NodeViewWrapper>
+    </div>
   );
 };
