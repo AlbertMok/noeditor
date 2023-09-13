@@ -200,7 +200,7 @@ export default function Editor({
       >
         {editor && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive('image') && <ImageResizer editor={editor} />}
-        {editor && <DragAndPlusButton ed={editor} dragHandleWidth={24} />}
+        {editor && <DragAndPlusButton _editor={editor} handleWidth={24} />}
         <EditorContent editor={editor} />
       </div>
     </div>
