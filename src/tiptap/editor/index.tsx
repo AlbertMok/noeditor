@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent, JSONContent, Extension } from '@tiptap/react';
 import { defaultEditorProps } from './props';
 import { defaultExtensions } from './extensions';
@@ -190,15 +190,17 @@ export default function Editor({
   }, [editor, content, hydrated]);
 
   return (
-    <div
-      onClick={() => {
-        editor?.chain().focus().run();
-      }}
-      className={className}
-    >
-      {editor && <EditorBubbleMenu editor={editor} />}
-      {editor?.isActive('image') && <ImageResizer editor={editor} />}
-      <EditorContent editor={editor} />
+    <div>
+      <div
+        onClick={() => {
+          editor?.chain().focus().run();
+        }}
+        className={className}
+      >
+        {editor && <EditorBubbleMenu editor={editor} />}
+        {editor?.isActive('image') && <ImageResizer editor={editor} />}
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }
