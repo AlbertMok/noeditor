@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/core';
 import { NodeViewWrapper } from '@tiptap/react';
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { absoluteRect, nodeDOMAtCoords, nodePosAtDOM } from './util';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -57,7 +57,6 @@ export const DragAndPlusButton = ({ ed: editor, dragHandleWidth }: DragButtonOpt
     event.dataTransfer.effectAllowed = 'copyMove'; //允许 copy 或者 move 操作。
 
     event.dataTransfer.setDragImage(node, 0, 0);
-
     view.dragging = { slice, move: event.ctrlKey };
   }
 
@@ -77,13 +76,13 @@ export const DragAndPlusButton = ({ ed: editor, dragHandleWidth }: DragButtonOpt
 
     const nodePos = nodePosAtDOM(node, view);
     if (!nodePos) return;
-
     view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos)));
   }
 
   function isCurrentNodeATextNode() {
-    console.log('12321812193');
-    if (!editor.view.editable) return false;
+    if (!editor.view.editable) {
+      return false;
+    }
     addEventListener('mousemove', (event) => {
       // 寻找鼠标对应的文本节点
       const node = nodeDOMAtCoords({
@@ -144,15 +143,19 @@ export const DragAndPlusButton = ({ ed: editor, dragHandleWidth }: DragButtonOpt
     addEventListener('click', (event) => {
       handleClick(event, editor.view);
     });
+    return true;
   }
-  useCallback(isCurrentNodeATextNode, [editor, handleClick, handleDragStart, dragHandleWidth]);
   const addClassNames = `add-handle ${isHidden ? 'hidden' : ''}`;
   const dragClassNames = `drag-handle ${isHidden ? 'hidden' : ''}`;
 
   return (
     <NodeViewWrapper className="toc">
-      <div className={addClassNames} style={{ top: addStyleTop.current, left: addStyleLeft.current }}></div> &&
-      <div className={dragClassNames} style={{ top: dragStyleTop.current, left: dragStyleLeft.current }}></div>
+      {isCurrentNodeATextNode() && (
+        <div className="asdjioqwjdoiqwj">
+          <div className={addClassNames} style={{ top: addStyleTop.current, left: addStyleLeft.current }}></div>{' '}
+          <div className={dragClassNames} style={{ top: dragStyleTop.current, left: dragStyleLeft.current }}></div>
+        </div>
+      )}
     </NodeViewWrapper>
   );
 };

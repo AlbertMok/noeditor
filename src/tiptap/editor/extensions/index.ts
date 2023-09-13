@@ -17,7 +17,7 @@ import SlashCommand from './slash-commands-extension';
 import CustomKeymap from './custom-keymap-extension';
 
 export const defaultExtensions = [
-  DragAndDrop,
+  // DragAndDrop,
   StarterKit.configure({
     bulletList: {
       HTMLAttributes: {

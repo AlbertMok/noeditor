@@ -16,6 +16,7 @@ import { ImageResizer } from './extensions/image-resizer';
 import { EditorProps } from '@tiptap/pm/view';
 import { Editor as EditorClass } from '@tiptap/core';
 import { EditorBubbleMenu } from './extensions/bubble-menu';
+import { DragAndPlusButton } from './extensions/drag-and-add-extension/DragButton';
 
 export default function Editor({
   // completionApi = '/api/generate',
@@ -199,6 +200,7 @@ export default function Editor({
       >
         {editor && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive('image') && <ImageResizer editor={editor} />}
+        {editor && <DragAndPlusButton ed={editor} dragHandleWidth={24} />}
         <EditorContent editor={editor} />
       </div>
     </div>

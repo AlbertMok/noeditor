@@ -1,5 +1,5 @@
 import { Extension } from '@tiptap/core';
-import { dragAND } from './DragAndAdd';
+import { DragHandle } from './DragAndAdd';
 
 interface DragAndDropOptions {}
 
@@ -8,10 +8,9 @@ const DragAndDrop = Extension.create<DragAndDropOptions>({
 
   addProseMirrorPlugins() {
     return [
-      // DragHandle({
-      //   dragHandleWidth: 24
-      // })
-      dragAND
+      DragHandle({
+        dragHandleWidth: 24
+      })
     ];
   }
 });
