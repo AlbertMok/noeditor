@@ -69,7 +69,6 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
       view.focus();
 
       view.dom.classList.remove('dragging');
-
       const node = nodeDOMAtCoords({
         x: event.clientX + 50 + dragHandleWidth,
         y: event.clientY
@@ -114,17 +113,18 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
       rect.width = dragHandleWidth;
 
       if (dragHandleRef.current && addHandleRef.current) {
-        //drag button
+        // drag button
         dragHandleRef.current.style.left = `${rect.left - rect.width}px`;
         dragHandleRef.current.style.top = `${rect.top}px`;
 
-        // plus button
+        // add button
         addHandleRef.current.style.left = `${rect.left - rect.width - 24}px`;
         addHandleRef.current.style.top = `${rect.top}px`;
       }
       showDragHandle();
     });
 
+    // 滚轮事件
     addEventListener('wheel', () => {
       hideDragHandle();
     });
@@ -136,6 +136,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     dragHandleRef.current?.addEventListener('dragstart', (event) => {
       handleDragStart(event, editor.view);
+      console.log('拉着ing');
     });
 
     dragHandleRef.current?.addEventListener('click', (event) => {
@@ -153,7 +154,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
     addEventListener('dragend', () => {
       editor.view.dom.classList.remove('dragging');
     });
-  }, [editor, dragHandleWidth]);
+  }, [editor, dragHandleWidth, dragHandleRef]);
   function isEditable() {
     if (!editor.view.editable) {
       return false;
@@ -166,7 +167,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
   return (
     <NodeViewWrapper className="toc">
       {isEditable() && (
-        <div>
+        <>
           <div
             ref={addHandleRef}
             className={addClassNames}
@@ -176,8 +177,9 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
             ref={dragHandleRef}
             className={dragClassNames}
             style={{ top: dragStyleTop.current, left: dragStyleLeft.current }}
+            draggable={true}
           ></div>
-        </div>
+        </>
       )}
     </NodeViewWrapper>
   );
