@@ -1,8 +1,8 @@
-import { PopoverContent } from './Popover';
+import { PopoverContent } from '../../Popover';
 
 export function SelectMenu() {
   return (
-    <PopoverContent>
+    <PopoverContent className="popover">
       <div>Hello</div>
     </PopoverContent>
   );

@@ -7,7 +7,8 @@ import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
 import { NodeSelection } from '@tiptap/pm/state';
 
 import { GripVertical, Plus } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from './SelectMenu/Popover';
+import { Popover, PopoverTrigger } from '../Popover';
+import { SelectMenu } from './SelectMenu';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -181,7 +182,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
                 <Plus size={20} color="#7a7a7a" />
               </div>
             </PopoverTrigger>
-            <PopoverContent className="Popover">asd q</PopoverContent>
+            <SelectMenu />
           </Popover>
           <div
             ref={dragHandleRef}
