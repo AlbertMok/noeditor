@@ -8,9 +8,7 @@ import {
   useDismiss,
   useRole,
   useInteractions,
-  useHover,
-  Placement,
-  safePolygon
+  Placement
 } from '@floating-ui/react';
 import { useMemo, useState } from 'react';
 
@@ -23,12 +21,12 @@ export interface PopoverOptions {
 }
 
 export function usePopover({
-  initialOpen = false,
-  placement = 'bottom',
+  initialOpen = false, //default value:false
+  placement = 'left', //default value:left
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen
-}: PopoverOptions = {}): any {
+}: PopoverOptions = {}) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
@@ -57,20 +55,10 @@ export function usePopover({
   const click = useClick(context, {
     enabled: controlledOpen == null
   });
-
   const dismiss = useDismiss(context);
-
   const role = useRole(context);
 
-  const hover = useHover(context, {
-    enabled: true,
-    move: true,
-    handleClose: safePolygon({
-      blockPointerEvents: true
-    })
-  });
-
-  const interactions = useInteractions([click, dismiss, role, hover]);
+  const interactions = useInteractions([click, dismiss, role]);
 
   return useMemo(
     () => ({

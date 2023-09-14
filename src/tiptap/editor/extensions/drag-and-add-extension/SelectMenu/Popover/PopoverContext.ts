@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { usePopover } from './use-popover';
+import { usePopover } from './Popover';
 
 type ContextType =
   | (ReturnType<typeof usePopover> & {
