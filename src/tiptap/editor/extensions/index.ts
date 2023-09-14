@@ -11,7 +11,6 @@ import { Markdown } from 'tiptap-markdown';
 import Highlight from '@tiptap/extension-highlight';
 import { InputRule } from '@tiptap/core';
 
-import DragAndDrop from './drag-and-add-extension';
 import CustomImage from './image-extention';
 import SlashCommand from './slash-commands-extension';
 import CustomKeymap from './custom-keymap-extension';

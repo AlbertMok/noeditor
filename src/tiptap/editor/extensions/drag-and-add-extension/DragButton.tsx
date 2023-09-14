@@ -5,7 +5,8 @@ import { absoluteRect, nodeDOMAtCoords, nodePosAtDOM } from './util';
 // @ts-ignore
 import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
 import { NodeSelection } from '@tiptap/pm/state';
-import { SelectMenu } from './SelectMenu';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import { GripVertical, Plus } from 'lucide-react';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -168,18 +169,27 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
     <div className="toc">
       {isEditable() && (
         <>
-          <SelectMenu />
-          <div
-            ref={addHandleRef}
-            className={addClassNames}
-            style={{ top: addStyleTop.current, left: addStyleLeft.current }}
-          ></div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <div
+                ref={addHandleRef}
+                className={addClassNames}
+                style={{ top: addStyleTop.current, left: addStyleLeft.current }}
+                onMouseMove={() => setIsHidden(false)}
+              >
+                <Plus />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>asdqwdoi</PopoverContent>
+          </Popover>
           <div
             ref={dragHandleRef}
             className={dragClassNames}
             style={{ top: dragStyleTop.current, left: dragStyleLeft.current }}
             draggable={true}
-          ></div>
+          >
+            <GripVertical />
+          </div>
         </>
       )}
     </div>

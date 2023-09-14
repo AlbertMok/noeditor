@@ -25,7 +25,7 @@ export function nodeDOMAtCoords(coords: { x: number; y: number }) {
     .elementsFromPoint(coords.x, coords.y) //document.elementsFromPoint(x, y) 是 JavaScript 中的一个方法，允许你获取位于网页上特定点 (x, y) 处的所有 HTML 元素。它返回一个类似数组的对象，其中包含该特定位置上的所有元素，最上层的元素位于集合的第一个位置。
     .find(
       (elem: Element) =>
-        elem.parentElement?.matches?.('.ProseMirror') ||
+        elem.parentElement?.matches?.('.ProseMirror') &&
         elem.matches(['li', 'p:not(:first-child)', 'pre', 'blockquote', 'h1, h2, h3, h4, h5, h6'].join(', '))
     );
 }

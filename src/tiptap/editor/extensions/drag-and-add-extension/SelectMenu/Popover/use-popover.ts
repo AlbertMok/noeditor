@@ -9,7 +9,8 @@ import {
   useRole,
   useInteractions,
   useHover,
-  Placement
+  Placement,
+  safePolygon
 } from '@floating-ui/react';
 import { useMemo, useState } from 'react';
 
@@ -61,7 +62,13 @@ export function usePopover({
 
   const role = useRole(context);
 
-  const hover = useHover(context);
+  const hover = useHover(context, {
+    enabled: true,
+    move: true,
+    handleClose: safePolygon({
+      blockPointerEvents: true
+    })
+  });
 
   const interactions = useInteractions([click, dismiss, role, hover]);
 
