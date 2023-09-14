@@ -169,26 +169,22 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
     <div className="toc">
       {isEditable() && (
         <>
-          <Popover>
-            <PopoverTrigger asChild>
-              <div
-                ref={addHandleRef}
-                className={addClassNames}
-                style={{ top: addStyleTop.current, left: addStyleLeft.current }}
-                onMouseMove={() => setIsHidden(false)}
-              >
-                <Plus />
-              </div>
-            </PopoverTrigger>
-            <PopoverContent>asdqwdoi</PopoverContent>
-          </Popover>
+          <div
+            ref={addHandleRef}
+            className={addClassNames}
+            style={{ top: addStyleTop.current, left: addStyleLeft.current }}
+            onMouseMove={() => setIsHidden(false)}
+          >
+            <Plus size={20} color="#7a7a7a" />
+          </div>
+
           <div
             ref={dragHandleRef}
             className={dragClassNames}
             style={{ top: dragStyleTop.current, left: dragStyleLeft.current }}
             draggable={true}
           >
-            <GripVertical />
+            <GripVertical size={20} color="#7a7a7a" />
           </div>
         </>
       )}
