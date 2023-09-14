@@ -7,8 +7,9 @@ import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
 import { NodeSelection } from '@tiptap/pm/state';
 
 import { GripVertical, Plus } from 'lucide-react';
-import { Popover, PopoverTrigger } from '../Popover';
+
 import { SelectMenu } from './SelectMenu';
+import { Popover, PopoverTrigger } from '@radix-ui/react-popover';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -81,6 +82,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
       const nodePos = nodePosAtDOM(node, view);
       if (!nodePos) return;
+
       view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos)));
     }
 
@@ -146,6 +148,10 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
       handleClick(event, editor.view);
     });
 
+    addHandleRef.current?.addEventListener('click', (event) => {
+      handleClick(event, editor.view);
+    });
+
     addEventListener('dragstart', () => {
       editor.view.dom.classList.add('dragging');
     });
@@ -158,12 +164,14 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
       editor.view.dom.classList.remove('dragging');
     });
   }, [editor, dragHandleWidth, dragHandleRef]);
+
   function isEditable() {
     if (!editor.view.editable) {
       return false;
     }
     return true;
   }
+
   const addClassNames = `add-handle ${isHidden ? 'hide' : ''}`;
   const dragClassNames = `drag-handle ${isHidden ? 'hide' : ''}`;
 
@@ -171,7 +179,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
     <div className="toc">
       {isEditable() && (
         <>
-          <Popover>
+          <Popover modal>
             <PopoverTrigger asChild>
               <div
                 ref={addHandleRef}
@@ -182,7 +190,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
                 <Plus size={20} color="#7a7a7a" />
               </div>
             </PopoverTrigger>
-            <SelectMenu />
+            <SelectMenu side="left" align="start" editor={editor} />
           </Popover>
           <div
             ref={dragHandleRef}

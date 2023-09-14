@@ -22,7 +22,7 @@ export interface PopoverOptions {
 
 export function usePopover({
   initialOpen = false, //default value:false
-  placement = 'left', //default value:left
+  placement = 'left-start', //default value:left
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen
