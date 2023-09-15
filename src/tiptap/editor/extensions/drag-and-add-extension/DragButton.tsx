@@ -32,6 +32,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
   const addStyleTop = useRef<string>('');
   const dragHandleRef = useRef<HTMLDivElement>(null);
   const addHandleRef = useRef<HTMLDivElement>(null);
+
   // 消除副作用
   useEffect(() => {
     // 开始拉的时候
@@ -147,6 +148,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     addHandleRef.current?.addEventListener('click', (event) => {
       handleClick(event, editor.view);
+      console.log();
     });
 
     addEventListener('dragstart', () => {

@@ -17,7 +17,7 @@ import { startImageUpload } from '../../image-extention/UploadImage';
 import { PopoverContent } from '../../Popover';
 
 type selectMenuProps = { editor: Editor };
-// side: 'top' | 'right' | 'bottom' | 'left'; align: 'start' | 'center' | 'end'
+
 export function SelectMenu({ editor }: selectMenuProps) {
   const range = { from: editor.state.selection.from, to: editor.state.selection.to };
   return (
@@ -63,7 +63,8 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['p', 'paragraph'],
       icon: <Text size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).enter().toggleNode('paragraph', 'paragraph').run();
+        // editor.chain().focus().deleteRange(range).enter().toggleNode('paragraph', 'paragraph').run();
+        console.log(editor.state.selection.content().content);
       }
     },
     {
