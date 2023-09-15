@@ -2,6 +2,7 @@ import { EditorProps } from '@tiptap/pm/view';
 import { startImageUpload } from './extensions/image-extention/UploadImage';
 
 export const defaultEditorProps: EditorProps = {
+  // 排版
   attributes: {
     class: `prose md:prose-lg lg:prose-xl prose-slate dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`
   },

@@ -201,6 +201,7 @@ export default function Editor({
         {editor && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive('image') && <ImageResizer editor={editor} />}
         {editor && <DragAndPlusButton _editor={editor} handleWidth={24} />}
+        <div className="character-count">{editor?.storage.characterCount.characters()} 个字</div>
         <EditorContent editor={editor} />
       </div>
     </div>

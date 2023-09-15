@@ -54,6 +54,11 @@
   }
 }
 
+.ProseMirror code::before,
+.ProseMirror code::after {
+  content: '';
+}
+
 @keyframes spinning {
   to {
     transform: rotate(360deg);
@@ -212,4 +217,11 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
   box-sizing: border-box;
   width: max-content;
   max-width: calc(100vw - 10px);
+}
+
+.character-count {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  color: var(--novel-stone-400);
 }

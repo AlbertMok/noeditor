@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, ReactNode, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useCallback, ReactNode, useRef, useLayoutEffect } from 'react';
 import { Editor, Range, Extension } from '@tiptap/core';
 import Suggestion from '@tiptap/suggestion';
 import { ReactRenderer } from '@tiptap/react';

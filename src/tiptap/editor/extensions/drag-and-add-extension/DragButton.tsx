@@ -5,11 +5,10 @@ import { absoluteRect, nodeDOMAtCoords, nodePosAtDOM } from './util';
 // @ts-ignore
 import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
 import { NodeSelection } from '@tiptap/pm/state';
-
 import { GripVertical, Plus } from 'lucide-react';
 
 import { SelectMenu } from './SelectMenu';
-import { Popover, PopoverTrigger } from '@radix-ui/react-popover';
+import { Popover, PopoverTrigger } from '../Popover';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -116,7 +115,6 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
         rect.left -= dragHandleWidth;
       }
       rect.width = dragHandleWidth;
-
       if (dragHandleRef.current && addHandleRef.current) {
         // drag button
         dragHandleRef.current.style.left = `${rect.left - rect.width}px`;
@@ -131,7 +129,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     // 滚轮事件
     addEventListener('wheel', () => {
-      hideDragHandle();
+      setIsHidden(true);
     });
 
     // 键盘事件
@@ -141,7 +139,6 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     dragHandleRef.current?.addEventListener('dragstart', (event) => {
       handleDragStart(event, editor.view);
-      console.log('拉着ing');
     });
 
     dragHandleRef.current?.addEventListener('click', (event) => {
@@ -185,12 +182,11 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
                 ref={addHandleRef}
                 className={addClassNames}
                 style={{ top: addStyleTop.current, left: addStyleLeft.current }}
-                onMouseMove={() => setIsHidden(false)}
               >
                 <Plus size={20} color="#7a7a7a" />
               </div>
             </PopoverTrigger>
-            <SelectMenu side="left" align="start" editor={editor} />
+            <SelectMenu editor={editor} />
           </Popover>
           <div
             ref={dragHandleRef}

@@ -50,12 +50,15 @@ export function usePopover({
     ]
   });
 
+  // 上下文管理
   const context = data.context;
 
   const click = useClick(context, {
-    enabled: controlledOpen == null
+    enabled: controlledOpen == null,
+    toggle: true
   });
   const dismiss = useDismiss(context);
+
   const role = useRole(context);
 
   const interactions = useInteractions([click, dismiss, role]);

@@ -9,6 +9,7 @@ import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import { Markdown } from 'tiptap-markdown';
 import Highlight from '@tiptap/extension-highlight';
+import CharacterCount from '@tiptap/extension-character-count';
 import { InputRule } from '@tiptap/core';
 
 import CustomImage from './image-extention';
@@ -16,7 +17,6 @@ import SlashCommand from './slash-commands-extension';
 import CustomKeymap from './custom-keymap-extension';
 
 export const defaultExtensions = [
-  // DragAndDrop,
   StarterKit.configure({
     bulletList: {
       HTMLAttributes: {
@@ -127,5 +127,6 @@ export const defaultExtensions = [
     html: false,
     transformCopiedText: true
   }),
-  CustomKeymap
+  CustomKeymap,
+  CharacterCount
 ];

@@ -14,14 +14,15 @@ import {
 } from 'lucide-react';
 import { Editor, Range } from '@tiptap/core';
 import { startImageUpload } from '../../image-extention/UploadImage';
-import { PopoverContent } from '@radix-ui/react-popover';
+import { PopoverContent } from '../../Popover';
 
-type selectMenuProps = { editor: Editor; side: 'top' | 'right' | 'bottom' | 'left'; align: 'start' | 'center' | 'end' };
-
-export function SelectMenu({ editor, side, align }: selectMenuProps) {
+type selectMenuProps = { editor: Editor };
+// side: 'top' | 'right' | 'bottom' | 'left'; align: 'start' | 'center' | 'end'
+export function SelectMenu({ editor }: selectMenuProps) {
+  const range = { from: editor.state.selection.from, to: editor.state.selection.to };
   return (
-    <PopoverContent className="popover" side={side} align={align}>
-      <CommandList items={getSuggestionItems()} editor={editor} />
+    <PopoverContent className="popover">
+      <CommandList items={getSuggestionItems({ editor: editor, range: range })} />{' '}
     </PopoverContent>
   );
 }
@@ -51,8 +52,8 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       title: 'Send Feedback',
       description: 'Let us know how we can improve.',
       icon: <MessageSquarePlus />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
+      command: () => {
+        editor.chain().focus().deleteRange(range).enter().deleteRange(range).run();
         window.open('/feedback', '_blank');
       }
     },
@@ -61,8 +62,8 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Just start typing with plain text.',
       searchTerms: ['p', 'paragraph'],
       icon: <Text size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').run();
+      command: () => {
+        editor.chain().focus().deleteRange(range).enter().toggleNode('paragraph', 'paragraph').run();
       }
     },
     {
@@ -70,7 +71,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Track tasks with a to-do list.',
       searchTerms: ['todo', 'task', 'list', 'check', 'checkbox'],
       icon: <ListTodo size={18} />,
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).toggleTaskList().run();
       }
     },
@@ -79,7 +80,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Big section heading.',
       searchTerms: ['title', 'big', 'large'],
       icon: <Heading1 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).setNode('heading', { level: 1 }).run();
       }
     },
@@ -88,7 +89,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Medium section heading.',
       searchTerms: ['subtitle', 'medium'],
       icon: <Heading2 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).setNode('heading', { level: 2 }).run();
       }
     },
@@ -97,7 +98,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Small section heading.',
       searchTerms: ['subtitle', 'small'],
       icon: <Heading3 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).setNode('heading', { level: 3 }).run();
       }
     },
@@ -106,8 +107,8 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Create a simple bullet list.',
       searchTerms: ['unordered', 'point'],
       icon: <List size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).toggleBulletList().run();
+      command: () => {
+        editor.chain().focus().deleteRange(range).enter().toggleBulletList().run();
       }
     },
     {
@@ -115,7 +116,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Create a list with numbering.',
       searchTerms: ['ordered'],
       icon: <ListOrdered size={18} />,
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).toggleOrderedList().run();
       }
     },
@@ -124,7 +125,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Capture a quote.',
       searchTerms: ['blockquote'],
       icon: <TextQuote size={18} />,
-      command: ({ editor, range }: CommandProps) =>
+      command: () =>
         editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').toggleBlockquote().run()
     },
     {
@@ -132,7 +133,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Capture a code snippet.',
       searchTerms: ['codeblock'],
       icon: <Code size={18} />,
-      command: ({ editor, range }: CommandProps) => editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
+      command: () => editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
     },
     {
       title: 'Image',
@@ -140,7 +141,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['photo', 'picture', 'media'],
       icon: <ImageIcon size={18} />,
 
-      command: ({ editor, range }: CommandProps) => {
+      command: () => {
         editor.chain().focus().deleteRange(range).run();
         // upload image
         const input = document.createElement('input');
@@ -175,17 +176,7 @@ export const updateScrollView = (container: HTMLElement, item: HTMLElement) => {
   }
 };
 
-const CommandList = ({
-  items
-}: // command
-// editor
-// range
-{
-  items: any[];
-  // command: ;
-  editor: any;
-  // range: any;
-}) => {
+const CommandList = ({ items }: { items: any[] }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const selectItem = useCallback(
@@ -196,7 +187,7 @@ const CommandList = ({
       // });
       if (item) {
         // 执行命令
-        item.command(item);
+        item.command();
       }
     },
     [items]
@@ -245,7 +236,7 @@ const CommandList = ({
   return items.length > 0 ? (
     <div
       ref={commandListContainer_d}
-      className="z-999 h-auto max-h-[330px] w-72 overflow-y-auto rounded-md border border-stone-200 bg-white px-1 py-2 shadow-md transition-all"
+      className=" h-auto max-h-[330px] w-72 overflow-y-auto rounded-md border border-stone-200 bg-white px-1 py-2 shadow-md transition-all "
     >
       {items.map((item: CommandItemProps, index: number) => {
         return (
@@ -260,8 +251,8 @@ const CommandList = ({
               {item.icon}
             </div>
             <div>
-              <p className="font-medium">{item.title}</p>
-              <p className="text-xs text-stone-500">{item.description}</p>
+              <div className="font-medium">{item.title}</div>
+              <div className="text-xs text-stone-500">{item.description}</div>
             </div>
           </button>
         );
