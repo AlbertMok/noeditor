@@ -8,7 +8,7 @@ import { NodeSelection } from '@tiptap/pm/state';
 import { GripVertical, Plus } from 'lucide-react';
 
 import { SelectMenu } from './SelectMenu';
-import { Popover, PopoverTrigger } from '../Popover';
+import { Popover, PopoverTrigger } from '@radix-ui/react-popover';
 
 type DragButtonOptions = {
   _editor: Editor;
@@ -73,6 +73,8 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
       view.focus();
 
       view.dom.classList.remove('dragging');
+
+      // 找出当前鼠标位置的DOM节点
       const node = nodeDOMAtCoords({
         x: event.clientX + 50 + dragHandleWidth,
         y: event.clientY
@@ -80,7 +82,9 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
       if (!(node instanceof Element)) return;
 
+      // 找出这个节点的坐标,如果是-1，则是顶层节点
       const nodePos = nodePosAtDOM(node, view);
+      console.log(nodePos);
       if (!nodePos) return;
 
       view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos)));
@@ -130,7 +134,7 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     // 滚轮事件
     addEventListener('wheel', () => {
-      setIsHidden(true);
+      hideDragHandle();
     });
 
     // 键盘事件
@@ -148,7 +152,6 @@ export const DragAndPlusButton = ({ _editor: editor, handleWidth: dragHandleWidt
 
     addHandleRef.current?.addEventListener('click', (event) => {
       handleClick(event, editor.view);
-      console.log();
     });
 
     addEventListener('dragstart', () => {

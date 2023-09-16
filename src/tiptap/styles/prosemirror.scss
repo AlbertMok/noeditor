@@ -225,3 +225,7 @@ ul[data-type='taskList'] li[data-checked='true'] > div > p {
   right: 30px;
   color: var(--novel-stone-400);
 }
+
+.popover {
+  z-index: 1;
+}

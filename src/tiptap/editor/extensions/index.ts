@@ -49,6 +49,7 @@ export const defaultExtensions = [
         spellcheck: 'false'
       }
     },
+
     horizontalRule: false,
     dropcursor: {
       color: '#DBEAFE',

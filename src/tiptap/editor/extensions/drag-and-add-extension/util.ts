@@ -43,13 +43,13 @@ export function nodePosAtDOM(node: Element, view: EditorView) {
   // 使用 getBoundingClientRect() 方法获取给定 DOM 元素的边界框信息，
   // 包括左上角的坐标 (boundingRect.left 和 boundingRect.top)。
   const boundingRect = node.getBoundingClientRect();
-
+  // console.log(boundingRect);
   // 将 DOM 元素的左上角坐标作为参数传递。这个方法会根据坐标位置返回编辑器文档中的一个位置。
   // posAtCoords会根据坐标位置返回编辑器文档中的DOM元素
   // 最后返回这个DOM元素的
   // Given a pair of viewport coordinates, return the document position that corresponds to them
   return view.posAtCoords({
-    left: boundingRect.left + 1,
-    top: boundingRect.top + 1
+    left: boundingRect.left + 3,
+    top: boundingRect.top + 3
   })?.inside;
 }

@@ -204,6 +204,10 @@ export default function Editor({
         <div className="character-count">{editor?.storage.characterCount.characters()} 个字</div>
         <EditorContent editor={editor} />
       </div>
+      <div>
+        {' '}
+        <pre>{JSON.stringify(editor?.getJSON(), null, 2)}</pre>
+      </div>
     </div>
   );
 }

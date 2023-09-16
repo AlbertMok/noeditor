@@ -14,14 +14,14 @@ import {
 } from 'lucide-react';
 import { Editor, Range } from '@tiptap/core';
 import { startImageUpload } from '../../image-extention/UploadImage';
-import { PopoverContent } from '../../Popover';
+import { PopoverContent } from '@radix-ui/react-popover';
 
 type selectMenuProps = { editor: Editor };
 
 export function SelectMenu({ editor }: selectMenuProps) {
   const range = { from: editor.state.selection.from, to: editor.state.selection.to };
   return (
-    <PopoverContent className="popover">
+    <PopoverContent className="popover" side="left" align="start" alignOffset={0}>
       <CommandList items={getSuggestionItems({ editor: editor, range: range })} />{' '}
     </PopoverContent>
   );
@@ -63,8 +63,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['p', 'paragraph'],
       icon: <Text size={18} />,
       command: () => {
-        // editor.chain().focus().deleteRange(range).enter().toggleNode('paragraph', 'paragraph').run();
-        console.log(editor.state.selection.content().content);
+        editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').run();
       }
     },
     {
@@ -109,7 +108,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['unordered', 'point'],
       icon: <List size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).enter().toggleBulletList().run();
+        editor.chain().focus().deleteRange(range).toggleBulletList().run();
       }
     },
     {
