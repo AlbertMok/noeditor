@@ -26,6 +26,7 @@
   --font-title: 'Cal Sans', sans-serif;
 }
 
+/* 黑夜模式 */
 .dark-theme {
   --novel-black: rgb(255 255 255);
   --novel-white: rgb(25 25 25);
@@ -50,6 +51,9 @@
   --novel-highlight-orange: #5c3a1a;
   --novel-highlight-pink: #5c1a3a;
   --novel-highlight-gray: #3a3a3a;
+
+  --novel-codeblock-color: #bbbfc4;
+  --novel-list-item-color: #1c81d9;
 }
 
 @font-face {

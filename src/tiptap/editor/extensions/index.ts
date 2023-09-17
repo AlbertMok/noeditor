@@ -35,12 +35,12 @@ export const defaultExtensions = [
     },
     blockquote: {
       HTMLAttributes: {
-        class: 'border-l-4 border-stone-700'
+        class: 'border-l-4 border-codeblock-color'
       }
     },
     codeBlock: {
       HTMLAttributes: {
-        class: 'rounded-sm bg-stone-100 p-5 font-mono font-medium text-stone-800'
+        class: 'rounded-sm bg-stone-100 p-5 font-mono font-medium text-stone-800 '
       }
     },
     code: {

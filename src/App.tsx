@@ -2,12 +2,9 @@ import { useState } from 'react';
 import './App.css';
 
 import { Editor } from './tiptap';
-import { createPortal } from 'react-dom';
 
 function App() {
   const [saveStatus, setSaveStatus] = useState('Saved');
-
-  createPortal(<p>asddwqd qwdqwdqwdjwqdojqwoijfowqijfoiqwjdoiwqjdoiqwjdoijwqoidj </p>, document.body);
 
   return (
     <div className=" dark:bg-black flex justify-center p-12">

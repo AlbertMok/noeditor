@@ -198,14 +198,13 @@ export default function Editor({
         }}
         className={className}
       >
-        {editor && <EditorBubbleMenu editor={editor} />}
+        {editor?.isEditable && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive('image') && <ImageResizer editor={editor} />}
         {editor && <DragAndPlusButton _editor={editor} handleWidth={24} />}
         <div className="character-count">{editor?.storage.characterCount.characters()} 个字</div>
         <EditorContent editor={editor} />
       </div>
       <div>
-        {' '}
         <pre>{JSON.stringify(editor?.getJSON(), null, 2)}</pre>
       </div>
     </div>

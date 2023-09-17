@@ -53,7 +53,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Let us know how we can improve.',
       icon: <MessageSquarePlus />,
       command: () => {
-        editor.chain().focus().deleteRange(range).enter().deleteRange(range).run();
+        editor.chain().focus().enter().deleteRange(range).run();
         window.open('/feedback', '_blank');
       }
     },
@@ -63,7 +63,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['p', 'paragraph'],
       icon: <Text size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').run();
+        editor.chain().focus().toggleNode('paragraph', 'paragraph').run();
       }
     },
     {
@@ -72,7 +72,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['todo', 'task', 'list', 'check', 'checkbox'],
       icon: <ListTodo size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).toggleTaskList().run();
+        editor.chain().focus().toggleTaskList().run();
       }
     },
     {
@@ -81,7 +81,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['title', 'big', 'large'],
       icon: <Heading1 size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).setNode('heading', { level: 1 }).run();
+        editor.chain().focus().setNode('heading', { level: 1 }).run();
       }
     },
     {
@@ -90,7 +90,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['subtitle', 'medium'],
       icon: <Heading2 size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).setNode('heading', { level: 2 }).run();
+        editor.chain().focus().setNode('heading', { level: 2 }).run();
       }
     },
     {
@@ -99,7 +99,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['subtitle', 'small'],
       icon: <Heading3 size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).setNode('heading', { level: 3 }).run();
+        editor.chain().focus().setNode('heading', { level: 3 }).run();
       }
     },
     {
@@ -108,7 +108,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['unordered', 'point'],
       icon: <List size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).toggleBulletList().run();
+        editor.chain().focus().toggleBulletList().run();
       }
     },
     {
@@ -117,7 +117,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       searchTerms: ['ordered'],
       icon: <ListOrdered size={18} />,
       command: () => {
-        editor.chain().focus().deleteRange(range).toggleOrderedList().run();
+        editor.chain().focus().toggleOrderedList().run();
       }
     },
     {
@@ -125,15 +125,14 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       description: 'Capture a quote.',
       searchTerms: ['blockquote'],
       icon: <TextQuote size={18} />,
-      command: () =>
-        editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').toggleBlockquote().run()
+      command: () => editor.chain().focus().toggleNode('paragraph', 'paragraph').toggleBlockquote().run()
     },
     {
       title: 'Code',
       description: 'Capture a code snippet.',
       searchTerms: ['codeblock'],
       icon: <Code size={18} />,
-      command: () => editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
+      command: () => editor.chain().focus().toggleCodeBlock().run()
     },
     {
       title: 'Image',
@@ -142,7 +141,7 @@ const getSuggestionItems = ({ editor, range }: CommandProps) => {
       icon: <ImageIcon size={18} />,
 
       command: () => {
-        editor.chain().focus().deleteRange(range).run();
+        editor.chain().focus().run();
         // upload image
         const input = document.createElement('input');
         input.type = 'file';
